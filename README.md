@@ -1,39 +1,54 @@
-# GSA Google Cloud Skill Boost Tracker
+# GCLoud Fasttrack Tracker
 
-Website tracker progress untuk Google Cloud Skill Boost Fasttrack Labs.
+A robust, multi-user web application to automatically track, manage, and monitor completion progress of Google Cloud Skills Boost "Fasttrack" labs.
 
-## Fitur
-- **Multi-user**: Pengguna login cukup menggunakan URL Google Cloud Skills Boost Public Profile mereka.
-- **Auto-Sync**: Menarik data kelulusan badge/lab secara realtime via scraping HTML public profile pihak Google (tanpa local files).
-- **Penanda Error**: Dapat menandai lab bermasalah / error dengan warna merah.
-- **Auto-run**: Dijalankan 24/7 di Docker container dengan systemd service (`gsa-web.service`).
+## Features
 
-## Teknologi
-- Next.js 16 (App Router)
-- SQLite & Prisma
-- Tailwind CSS & Shadcn UI
+- **Multi-user Support**: Log in using your Google Cloud Skills Boost Public Profile URL.
+- **Auto-Sync**: Automatically fetches and scrapes completion data directly from your public profile to restore progress.
+- **Error Tracking**: Conveniently mark any lab as 'Error' to highlight issues, with easy toggling.
+- **Persistent Deployment**: Runs 24/7 in a Docker container using a systemd service.
+
+## Tech Stack
+
+- **Next.js 16** (App Router)
+- **SQLite** & **Prisma ORM**
+- **Tailwind CSS** & **Shadcn UI**
+- **Docker** & **Docker Compose**
+- **Cloudflare Tunnel**
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 22+
 - Docker & Docker Compose
-- Cloudflare Tunnel
+- Cloudflare `cloudflared` (if hosting with tunnel)
 
-## Cara Menjalankan secara Lokal
+### Installation
 
-1. Duplikasi `.env.example` ke `.env`
-2. Instalasi depedensi:
-```bash
-npm install
-```
-3. Migrasi database SQLite:
-```bash
-npx prisma db push
-```
-4. Build dan jalankan mode development:
-```bash
-npm run dev
-```
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone <repo-url>
+   cd gcloud-fasttrack-tracker
+   npm install
+   ```
 
-## Docker Deploy
+2. Setup environment variables:
+   ```bash
+   cp .env.example .env
+   ```
 
-Jalankan container:
+3. Initialize database:
+   ```bash
+   npx prisma db push
+   ```
+
+### Docker Deployment
+
+Run the application as a container:
 ```bash
 docker compose up -d --build
 ```
+
+The application will be accessible on port `3000`.
