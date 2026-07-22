@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gsa-web
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount SQLite db to prevent loss on container rebuild
+      - ./prisma:/app/prisma
+      # Mount the /home/romi/gsa folder so the sync script can read fasttrack.json and labDone.txt
+      - /home/romi/gsa:/home/romi/gsa
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/prisma/dev.db

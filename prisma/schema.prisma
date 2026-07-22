@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Lab {
+  id        Int       @id @default(autoincrement())
+  title     String    @unique
+  url       String
+  sortOrder Int       @default(0)
+  userLabs  UserLab[]
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  profileUrl String    @unique
+  name       String    @default("")
+  createdAt  DateTime  @default(now())
+  userLabs   UserLab[]
+}
+
+model UserLab {
+  id      Int     @id @default(autoincrement())
+  userId  Int
+  labId   Int
+  isDone  Boolean @default(false)
+  isError Boolean @default(false)
+  user    User    @relation(fields: [userId], references: [id])
+  lab     Lab     @relation(fields: [labId], references: [id])
+
+  @@unique([userId, labId])
+}
