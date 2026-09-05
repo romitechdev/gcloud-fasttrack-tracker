@@ -52,3 +52,7 @@ docker compose up -d --build
 ```
 
 The application will be accessible on port `3000`.
+
+<!-- last-updated -->
+_Last updated: 2026-09-05_
+
